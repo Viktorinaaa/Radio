@@ -5,28 +5,27 @@ public class Radio {
     private int currentVolume;
     private int minRS = 0;
     private int maxRS = 9;
+    private int minVolume = 0;
+    private int maxVolume = 10;
 
-
-    //метод увеличения радиостанции
     public void increaseRS() {
-        if (currentRS >= 0 & currentRS < 9) {
+        if (currentRS < maxRS) {
             currentRS += 1;
-        } else if (currentRS == 9) {
-            currentRS = 0;
         } else {
-            currentRS = 0;
+            currentRS = minRS;
         }
         setCurrentRS(currentRS);
     }
 
+
     //метод уменьшения радиостанции
     public void decreaseRS() {
-        if (currentRS > 0 & currentRS < 10) {
+
+
+        if (currentRS != minRS) {
             currentRS -= 1;
-        } else if (currentRS == 0) {
-            currentRS = 9;
         } else {
-            currentRS = 0;
+            currentRS = maxRS;
         }
         setCurrentRS(currentRS);
     }
@@ -36,6 +35,12 @@ public class Radio {
     }
 
     public void setCurrentRS(int currentRS) {
+        if (currentRS < minRS) {
+            return;
+        }
+        if (currentRS > maxRS) {
+            return;
+        }
         this.currentRS = currentRS;
     }
 
@@ -45,29 +50,32 @@ public class Radio {
     }
 
     public void setCurrentVolume(int currentVolume) {
+        if (currentVolume < minVolume) {
+            return;
+        }
+        if (currentVolume > maxVolume) {
+            return;
+        }
         this.currentVolume = currentVolume;
+
     }
 
     //метод увеличения громкости
     public void increaseVolume() {
-        if (currentVolume >= 0 & currentVolume < 10) {
+        if (currentVolume < maxVolume) {
             currentVolume += 1;
-        } else if (currentVolume == 10) {
-            currentVolume = 10;
         } else {
-            currentVolume = 0;
+            currentVolume = maxVolume;
         }
         setCurrentVolume(currentVolume);
     }
 
     //метод уменьшения громкости
     public void decreaseVolume() {
-        if (currentVolume > 0 & currentVolume <= 10) {
+        if (currentVolume != minVolume) {
             currentVolume -= 1;
-        } else if (currentVolume == 0) {
-            currentVolume = 0;
         } else {
-            currentVolume = 0;
+            currentVolume = minVolume;
         }
         setCurrentVolume(currentVolume);
     }
